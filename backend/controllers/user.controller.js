@@ -135,9 +135,11 @@ export const login =async (req,res) =>{
 
 
             // cloudinary aayega idhar
-
-            const fileUri=getDataUri(file);
-            const cloudResponse=await cloudinary.uploader.upload(fileUri.content);
+            const cloudResponse=null;
+            if(file){
+                const fileUri=getDataUri(file);
+                cloudResponse=await cloudinary.uploader.upload(fileUri.content);
+            }
         
             let skillsArray;
         if(skills){

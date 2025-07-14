@@ -6,22 +6,26 @@ import LatestJobs from './LatestJobs'
 import Footer from './Footer'
 import useGetAllJobs from '@/hooks/useGetAllJobs'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import store from '@/redux/store'
 import { setSearchedQuery } from '@/redux/jobSlice'
 
 const Home=()=> {
   const dispatch=useDispatch();
   const navigate=useNavigate();
+  // console.log("Inside Home");
+  
+  // const {allJobs}=useSelector(store=>store.job);
+  // console.log("Latest job ",allJobs);
   useGetAllJobs();
+  
   // console.log("Hook");
   // console.log("useEffect"); 
-  dispatch(setSearchedQuery(""));
   const {user}=useSelector(store=>store.auth);
   const {searchedQuery}=useSelector(store=>store.job);
-  
+  // const location = useLocation();
   useEffect(()=>{
-    
+    dispatch(setSearchedQuery(""));
     if(user?.role ==='recruiter'){
       navigate("/admin/companies");
     }
